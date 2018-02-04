@@ -10,7 +10,7 @@ goodwin <- function(t, y, p) {
     dX <- p1*K^h/(K^h + Z^h) - d1*X
     dY <- p2*X - d2*Y
     dZ <- p3*Y - d3*Z
-    list(c(X=dX, Y=dY, Y= dZ))
+    list(c(X=dX, Y=dY, Z= dZ))
   })
 }
 
@@ -56,7 +56,7 @@ ui <- fluidPage(
   sidebarLayout(
     sidebarPanel(
       ## generic creation of UI elements
-      h4("Init values"),
+      h4("Initial values"),
       lapply(L_y0, function(x) do.call("numericInput", x)),   # <--------
       
       h4("Parameters"),
