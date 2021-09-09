@@ -14,7 +14,7 @@ bistable <- function(t, y, p) {
 
 ## prepare data structures to create UI programmatically
 y0    <- c(X=1)
-parms <- c(K = 1, h=2, d=0.5)
+parms <- c(K = 1, h=2, d=0.25)
 aspect <- 0.5
 
 makelist <- function(i, obj, min=NA, max=NA, step=NA, width=NULL) {
@@ -25,7 +25,7 @@ makelist <- function(i, obj, min=NA, max=NA, step=NA, width=NULL) {
 
 ## two lists of lists
 L_parms <- lapply(1:length(parms), makelist, obj=parms, min=0, max=2, step=0.05, width=75)
-L_y0 <- lapply(1:length(y0), makelist, obj=y0, min=0, max=3, step=0.1, width=75)
+L_y0 <- lapply(1:length(y0), makelist, obj=y0, min=0, max=5, step=0.1, width=75)
 
 server <- function(input, output, session) {
   output$bistable <- renderPlot({
@@ -38,7 +38,7 @@ server <- function(input, output, session) {
     par(mfrow=c(2, 1))
     f <- ggplot(df1, aes(x=time, y=value, color=var)) + geom_line(size=1) + theme_bw() + xlab("Time") + 
       ylab("Species") + theme(aspect.ratio = 1/4, legend.position = "top", legend.title = element_blank()) +
-      ggtitle("time course") + ylim(c(0,2))
+      ggtitle("time course") + ylim(c(0,5))
     print(f)
     
   }, height = function() {
@@ -47,7 +47,8 @@ server <- function(input, output, session) {
 }
 
 ui <- fluidPage(
-  headerPanel("Bistable system"),
+  headerPanel("A simple bistable system"),
+  withMathJax("$$\\frac{dX}{dt} = \\frac{X^h}{X^h + K^h} - dX$$"),
   sidebarLayout(
     sidebarPanel(
       ## generic creation of UI elements

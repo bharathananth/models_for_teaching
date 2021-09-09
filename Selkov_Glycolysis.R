@@ -25,8 +25,8 @@ makelist <- function(i, obj, min=NA, max=NA, step=NA, width=NULL) {
 }
 
 ## two lists of lists
-L_parms <- lapply(1:length(parms), makelist, obj=parms, min=0, max=5, step=0.1, width=75)
-L_y0 <- lapply(1:length(y0), makelist, obj=y0, min=0, max=5, step=0.1, width=75)
+L_parms <- lapply(1:length(parms), makelist, obj=parms, min=0, max=5, step=0.05, width=75)
+L_y0 <- lapply(1:length(y0), makelist, obj=y0, min=0, max=5, step=0.05, width=75)
 
 server <- function(input, output, session) {
   output$selkov <- renderPlot({
@@ -51,7 +51,8 @@ server <- function(input, output, session) {
 }
 
 ui <- fluidPage(
-  headerPanel("Selkov model of Glycolysis"),
+  headerPanel("Selkov model of glycolysis"),
+  withMathJax("\\begin{eqnarray} \\frac{dX}{dt }&= \\alpha - \\beta  X  Y^2 \\\\ \\frac{dY}{dt} &= \\beta X Y^2 - \\gamma Y \\end{eqnarray}"),
   sidebarLayout(
     sidebarPanel(
       ## generic creation of UI elements
