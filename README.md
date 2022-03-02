@@ -2,16 +2,22 @@
 
 These Shiny apps were written with sole purpose of teaching modeling in Biology. 
 
-The models present are:
-1. Simple bistable system
-2. Glycolysis model of Selkov (oscillations)
-3. The Goodwin oscillator 
-4. Gene driven by oscillatory transcription factor
+The models provided are:
 
-### Installation
+1. Simple bistable system [*Bistability.R*]
+2. Glycolysis model of Selkov (oscillations) [*Selkov_Glycolysis.R*]
+3. The Goodwin oscillator [*Goodwin.R*]
+4. Gene driven by oscillatory transcription factor [*Clock_driven_gene.R*]
 
+### Installation and execution
+
+1. Install R from [https://www.r-project.org](https://www.r-project.org)
+
+2. Install RStudio Desktop from [www.rstudio.com](https://www.rstudio.com/products/rstudio/)
+
+3. Run the commands below inside RStudio to access the models
 ```r
-install.packages(c("deSolve","tidyverse","magrittr","gridExtra"))
+install.packages(c("deSolve","tidyverse","magrittr","gridExtra","shiny"))
 runApp('<Name of model .R file>')
 # It is often convenient to the click on 'Open in Browser' button in the new window to view the app in your browser.
 ```
