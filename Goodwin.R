@@ -26,8 +26,8 @@ makelist <- function(i, obj, min=NA, max=NA, step=NA, width=NULL) {
 }
 
 ## two lists of lists
-L_parms <- lapply(1:length(parms), makelist, obj=parms, min=0, max=10, step=0.2, width=75)
-L_y0 <- lapply(1:length(y0), makelist, obj=y0, min=0, max=10, step=0.2, width=75)
+L_parms <- lapply(1:length(parms), makelist, obj=parms, min=0, max=10, step=0.2, width=200)
+L_y0 <- lapply(1:length(y0), makelist, obj=y0, min=0, max=5, step=0.2, width=200)
 
 server <- function(input, output, session) {
   output$goodwin <- renderPlot({
@@ -54,16 +54,16 @@ server <- function(input, output, session) {
 ui <- fluidPage(
   headerPanel("Goodwin oscillator"),
   withMathJax(),
-  helpText("\\begin{eqnarray} \\frac{dX}{dt }&= p_1 \\frac{K^h}{K^h + Z^h}- d_1  X \\\\ \\frac{dY}{dt} &= p_2 X - d_2 Y \\\\ \\frac{dZ}{dt} &= p_3 Y - d_3 Z \\end{eqnarray}"),
+  helpText("\\begin{eqnarray} \\frac{dX}{dt} &= p_1 \\frac{K^h}{K^h + Z^h}- d_1  X \\\\ \\frac{dY}{dt} &= p_2 X - d_2 Y \\\\ \\frac{dZ}{dt} &= p_3 Y - d_3 Z \\end{eqnarray}"),
   sidebarLayout(
     sidebarPanel(
       ## generic creation of UI elements
       h4("Initial values"),
       withMathJax(),
-      lapply(L_y0, function(x) do.call("numericInput", x)),   # <--------
+      lapply(L_y0, function(x) do.call("sliderInput", x)),   # <--------
       
       h4("Parameters"),
-      lapply(L_parms, function(x) do.call("numericInput", x)), # <--------
+      lapply(L_parms, function(x) do.call("sliderInput", x)), # <--------
       
       width = 3
     ),

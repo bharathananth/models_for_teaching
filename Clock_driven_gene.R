@@ -24,8 +24,8 @@ makelist <- function(i, obj, min=NA, max=NA, step=NA, width=NULL) {
 }
 
 ## two lists of lists
-L_parms <- lapply(1:length(parms), makelist, obj=parms, min=0, max=2, step=0.05, width=75)
-L_y0 <- lapply(1:length(y0), makelist, obj=y0, min=0, max=3, step=0.05, width=75)
+L_parms <- lapply(1:length(parms), makelist, obj=parms, min=0, max=2, step=0.05, width=200)
+L_y0 <- lapply(1:length(y0), makelist, obj=y0, min=0, max=3, step=0.1, width=200)
 
 server <- function(input, output, session) {
   output$ccg <- renderPlot({
@@ -38,7 +38,7 @@ server <- function(input, output, session) {
             mutate(input = with(L_input, a + A*cos(2*pi*time/24))) %>%
             gather(var, value,-time) %>%
             group_by(var) %>%
-            mutate(norm_value = value/mean(value))
+            mutate(norm_value = value/mean(value[-(1:100)]))
             
     f1 <- ggplot(df1, aes(x=time, y=value, color=var)) + geom_line(size=1) + theme_bw() + xlab("Time") + 
       ylab("Species") + theme(aspect.ratio = 1/4, legend.position = "top", legend.title = element_blank()) +
@@ -46,7 +46,7 @@ server <- function(input, output, session) {
     
     f2 <- ggplot(df1, aes(x=time, y=norm_value, color=var)) + geom_line(size=1) + theme_bw() + xlab("Time") + 
       ylab("Species") + theme(aspect.ratio = 1/4, legend.position = "top", legend.title = element_blank()) +
-      ggtitle("normalized time course") + ylim(c(0,2))
+      ggtitle("time course normalized by mean (excluding initial transient)") + ylim(c(0,2.5))
     
     grid.arrange(f1, f2, ncol=1)
 
@@ -62,10 +62,10 @@ ui <- fluidPage(
     sidebarPanel(
       ## generic creation of UI elements
       h4("Initial values"),
-      lapply(L_y0, function(x) do.call("numericInput", x)),   # <--------
+      lapply(L_y0, function(x) do.call("sliderInput", x)),   # <--------
       
       h4("Parameters"),
-      lapply(L_parms, function(x) do.call("numericInput", x)), # <--------
+      lapply(L_parms, function(x) do.call("sliderInput", x)), # <--------
       
       width = 4
     ),

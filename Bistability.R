@@ -24,8 +24,8 @@ makelist <- function(i, obj, min=NA, max=NA, step=NA, width=NULL) {
 }
 
 ## two lists of lists
-L_parms <- lapply(1:length(parms), makelist, obj=parms, min=0, max=2, step=0.05, width=75)
-L_y0 <- lapply(1:length(y0), makelist, obj=y0, min=0, max=5, step=0.1, width=75)
+L_parms <- lapply(1:length(parms), makelist, obj=parms, min=0, max=2, step=0.05, width=200)
+L_y0 <- lapply(1:length(y0), makelist, obj=y0, min=0, max=5, step=0.1, width=200)
 
 server <- function(input, output, session) {
   output$bistable <- renderPlot({
@@ -53,10 +53,10 @@ ui <- fluidPage(
     sidebarPanel(
       ## generic creation of UI elements
       h4("Initial values"),
-      lapply(L_y0, function(x) do.call("numericInput", x)),   # <--------
+      lapply(L_y0, function(x) do.call("sliderInput", x)),   # <--------
       
       h4("Parameters"),
-      lapply(L_parms, function(x) do.call("numericInput", x)), # <--------
+      lapply(L_parms, function(x) do.call("sliderInput", x)), # <--------
       
       width = 4
     ),

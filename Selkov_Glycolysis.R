@@ -7,15 +7,15 @@ library(gridExtra)
 
 selkov <- function(t, y, p) {
   with(as.list(c(y, p)), {
-    dX <- a - b*X*Y^2
-    dY <- b*X*Y^2-g*Y
+    dX <- alpha - beta*X*Y^2
+    dY <- beta*X*Y^2-gamma*Y
     list(c(X=dX, Y=dY))
   })
 }
 
 ## prepare data structures to create UI programmatically
 y0    <- c(X=1.01, Y=0.99)
-parms <- c(a=1,b=0.9,g=0.9)
+parms <- c(alpha=1,beta=0.9,gamma=0.9)
 aspect <- 0.8
 
 makelist <- function(i, obj, min=NA, max=NA, step=NA, width=NULL) {
@@ -25,14 +25,14 @@ makelist <- function(i, obj, min=NA, max=NA, step=NA, width=NULL) {
 }
 
 ## two lists of lists
-L_parms <- lapply(1:length(parms), makelist, obj=parms, min=0, max=5, step=0.05, width=75)
-L_y0 <- lapply(1:length(y0), makelist, obj=y0, min=0, max=5, step=0.05, width=75)
+L_parms <- lapply(1:length(parms), makelist, obj=parms, min=0, max=2, step=0.05, width=200)
+L_y0 <- lapply(1:length(y0), makelist, obj=y0, min=0, max=4, step=0.05, width=200)
 
 server <- function(input, output, session) {
   output$selkov <- renderPlot({
     L_input <- reactiveValuesToList(input) # to enable width
     y0    <- with(L_input, c(X=X, Y=Y))
-    parms <- with(L_input, c(a=a,b=b,g=g))
+    parms <- with(L_input, c(alpha=alpha,beta=beta,gamma=gamma))
     times <- seq(0, 150, .1)
     out <- ode(y0, times, selkov, parms)
     df1 <- data.frame(out) %>% gather(var, value,-time)
@@ -57,10 +57,10 @@ ui <- fluidPage(
     sidebarPanel(
       ## generic creation of UI elements
       h4("Initial values"),
-      lapply(L_y0, function(x) do.call("numericInput", x)),   # <--------
+      lapply(L_y0, function(x) do.call("sliderInput", x)),   # <--------
       
       h4("Parameters"),
-      lapply(L_parms, function(x) do.call("numericInput", x)), # <--------
+      lapply(L_parms, function(x) do.call("sliderInput", x)), # <--------
       
       width = 4
     ),
