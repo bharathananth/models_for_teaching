@@ -21,3 +21,6 @@ install.packages(c("deSolve","tidyverse","magrittr","gridExtra","shiny"))
 runApp('<Name of model .R file>')
 # It is often convenient to the click on 'Open in Browser' button in the new window to view the app in your browser.
 ```
+
+#### License
+This work is shared under GPLv3 license.
