@@ -54,7 +54,7 @@ server <- function(input, output, session) {
 ui <- fluidPage(
   headerPanel("Goodwin oscillator"),
   withMathJax(),
-  helpText("\\begin{eqnarray} \\frac{dX}{dt} &= p_1 \\frac{K^h}{K^h + Z^h}- d_1  X \\\\ \\frac{dY}{dt} &= p_2 X - d_2 Y \\\\ \\frac{dZ}{dt} &= p_3 Y - d_3 Z \\end{eqnarray}"),
+  helpText("\\begin{eqnarray} \\frac{dX}{dt} =& p_1 \\frac{K^h}{K^h + Z^h} - d_1  X \\\\ \\frac{dY}{dt} =& p_2 X - d_2 Y \\\\ \\frac{dZ}{dt} =& p_3 Y - d_3 Z \\end{eqnarray}"),
   sidebarLayout(
     sidebarPanel(
       ## generic creation of UI elements
