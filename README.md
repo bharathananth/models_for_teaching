@@ -17,8 +17,7 @@ The models provided are:
 
 3. Download the model files using one of the following two options:
 
-    a. In a terminal, if you have ``git`` installed, 
-    run ``git clone https://github.com/bharathananth/models_for_teaching.git``
+    a. In a terminal, if you have ``git`` installed, run ``git clone https://github.com/bharathananth/models_for_teaching.git``
        
     b. Click on the **green** button marked Code on the github page and select **Download ZIP**. Then unzip it.
     
