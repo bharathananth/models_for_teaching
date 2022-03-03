@@ -16,8 +16,10 @@ The models provided are:
 2. Install RStudio Desktop from [www.rstudio.com](https://www.rstudio.com/products/rstudio/)
 
 3. Download the model files using one of the following two options:
+
     a. In a terminal, if you have ``git`` installed, run
        ``git clone https://github.com/bharathananth/models_for_teaching.git``
+       
     b. Click on the **green** button marked Code on the github page and select **Download ZIP**. Then unzip it.
     
 4. Run the commands below inside RStudio to access the models
