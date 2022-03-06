@@ -21,10 +21,11 @@ The models provided are:
        
     b. Click on the **green** button marked Code on the github page and select **Download ZIP**. Then unzip it.
     
-4. Run the commands below inside RStudio to access the models
+4. Run the commands below **inside RStudio**:
 ```r
 install.packages(c("deSolve","tidyverse","magrittr","gridExtra","shiny"))
-runApp('<Name of model .R file>')
+setwd("<directory where files are located>") 
+runApp('<Name of model .R file>') # i.e., to run first model use runApp('Bistability.R')
 # It is often convenient to the click on 'Open in Browser' button in the new window to view the app in your browser.
 ```
 
